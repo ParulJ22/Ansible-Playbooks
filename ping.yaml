@@ -1,0 +1,13 @@
+---
+
+- hosts: webserver
+  become: true
+  tasks:
+   - name: creating user
+     user: name=playuser2 uid=1500
+
+- hosts: ansible3
+  become: true
+  tasks:
+   - name: create file
+     file: path=/home/user/play.txt state=touch

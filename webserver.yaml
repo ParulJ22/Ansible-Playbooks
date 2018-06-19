@@ -1,0 +1,18 @@
+---
+
+- hosts: webserver
+  become: true
+  tasks:
+   - name: logic test
+     file: path=/home/user/logic.txt state=touch
+     when: ansible_hostname == 'ansible2'
+ 
+   - name: Install apache2
+     apt: name=apache2 state=present
+
+   - name: Start apache2 service
+     service: name=apache2 enabled=yes state=started
+
+   - name: Show name on homepage
+     shell: echo myname > /var/www/html/index.html
+     
